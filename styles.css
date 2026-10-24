@@ -500,6 +500,15 @@ h3 { font-size: 1.15rem; margin-bottom: 0.5em; }
   margin-top: 0.6rem;
 }
 
+.contact-details .btn {
+  margin-top: 1.1rem;
+  width: fit-content;
+}
+
+.contact-details .btn + .btn {
+  margin-top: 0.7rem;
+}
+
 .contact-form {
   background: var(--surface);
   border: 1px solid var(--border);
