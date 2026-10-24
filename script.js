@@ -50,7 +50,7 @@ form.addEventListener("submit", (e) => {
 
   const subject = encodeURIComponent(`Project inquiry from ${name}`);
   const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
-  window.location.href = `mailto:hello@wfp.dev?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:paulfwilliam@gmail.com?subject=${subject}&body=${body}`;
 
   note.textContent = "Opening your email client…";
 });
