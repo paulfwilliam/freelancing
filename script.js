@@ -37,22 +37,26 @@ const observer = new IntersectionObserver(
 
 document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 
-// ============ Contact form (mailto fallback) ============
+// ============ Contact form (FormSubmit → email) ============
 const form = document.getElementById("contactForm");
 const note = document.getElementById("formNote");
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const data = new FormData(form);
-  const name = data.get("name");
-  const email = data.get("email");
-  const message = data.get("message");
+  note.textContent = "Sending…";
 
-  const subject = encodeURIComponent(`Project inquiry from ${name}`);
-  const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
-  window.location.href = `mailto:paulfwilliam@gmail.com?subject=${subject}&body=${body}`;
-
-  note.textContent = "Opening your email client…";
+  try {
+    const res = await fetch(form.action, {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: new FormData(form),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    note.textContent = "Message sent — I'll get back to you within one business day.";
+    form.reset();
+  } catch {
+    note.textContent = "Couldn't send right now — email me at paulfwilliam@gmail.com instead.";
+  }
 });
 
 // ============ Footer year ============
